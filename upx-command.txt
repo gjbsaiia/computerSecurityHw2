@@ -1,0 +1,11 @@
+gjbsaiia@Chillbot:~/Documents/ComputerSecurity/hw2$ upx PE-Import.exe -o packed_PE-Import.exe
+                       Ultimate Packer for eXecutables
+                          Copyright (C) 1996 - 2017
+UPX 3.94        Markus Oberhumer, Laszlo Molnar & John Reiser   May 12th 2017
+
+        File size         Ratio      Format      Name
+   --------------------   ------   -----------   -----------
+    366901 ->    111413   30.37%    win32/pe     packed_PE-Import.exe          
+
+Packed 1 file.
+

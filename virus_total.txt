@@ -1,0 +1,8 @@
+VirusTotal:
+        No Engines detected either PE-Import.exe or packed_PE-Import.exe
+
+-->     6 Engines detected malicious_PE-Import.exe 
+        https://www.virustotal.com/gui/file/0fb54339f398d74f0cd0a7e79e85e8883cdc42c5b6489e38543c71bcfb3a24a6/detection
+
+-->     8 Engines detected packed_malicious_import.exe
+        https://www.virustotal.com/gui/file/924d1b5b0ae7100a28f4d7795ca5fb384b6f78ee7b43c4d70668013b34db7c7c/detection

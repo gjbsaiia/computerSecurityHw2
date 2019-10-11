@@ -1,0 +1,372 @@
+gjbsaiia@Chillbot:~/Documents/ComputerSecurity/hw2$ readpe PE-Import.exe
+DOS Header
+    Magic number:                    0x5a4d (MZ)
+    Bytes in last page:              144
+    Pages in file:                   3
+    Relocations:                     0
+    Size of header in paragraphs:    4
+    Minimum extra paragraphs:        0
+    Maximum extra paragraphs:        65535
+    Initial (relative) SS value:     0
+    Initial SP value:                0xb8
+    Initial IP value:                0
+    Initial (relative) CS value:     0
+    Address of relocation table:     0x40
+    Overlay number:                  0
+    OEM identifier:                  0
+    OEM information:                 0
+    PE header offset:                0x80
+COFF/File header
+    Machine:                         0x14c IMAGE_FILE_MACHINE_I386
+    Number of sections:              15
+    Date/time stamp:                 1570825075 (Fri, 19 Aug 45923955 00:57:23 UTC)
+    Symbol Table offset:             0x52600
+    Number of symbols:               1365
+    Size of optional header:         0xe0
+    Characteristics:                 0x107
+    Characteristics names
+                                         IMAGE_FILE_RELOCS_STRIPPED
+                                         IMAGE_FILE_EXECUTABLE_IMAGE
+                                         IMAGE_FILE_LINE_NUMS_STRIPPED
+                                         IMAGE_FILE_32BIT_MACHINE
+Optional/Image header
+    Magic number:                    0x10b (PE32)
+    Linker major version:            2
+    Linker minor version:            30
+    Size of .text section:           0x1e00
+    Size of .data section:           0x3400
+    Size of .bss section:            0x400
+    Entrypoint:                      0x14e0
+    Address of .text section:        0x1000
+    Address of .data section:        0x3000
+    ImageBase:                       0x400000
+    Alignment of sections:           0x1000
+    Alignment factor:                0x200
+    Major version of required OS:    4
+    Minor version of required OS:    0
+    Major version of image:          1
+    Minor version of image:          0
+    Major version of subsystem:      4
+    Minor version of subsystem:      0
+    Size of image:                   0x5c000
+    Size of headers:                 0x400
+    Checksum:                        0x5d1cf
+    Subsystem required:              0x3 (IMAGE_SUBSYSTEM_WINDOWS_CUI)
+    DLL characteristics:             0x140
+    DLL characteristics names
+                                         IMAGE_DLLCHARACTERISTICS_DYNAMIC_BASE
+                                         IMAGE_DLLCHARACTERISTICS_NX_COMPAT
+    Size of stack to reserve:        0x200000
+    Size of stack to commit:         0x1000
+    Size of heap space to reserve:   0x100000
+    Size of heap space to commit:    0x1000
+Data directories
+    Directory
+        IMAGE_DIRECTORY_ENTRY_IMPORT:    0x6000 (1592 bytes)
+    Directory
+        IMAGE_DIRECTORY_ENTRY_TLS:       0x8004 (24 bytes)
+    Directory
+        IMAGE_DIRECTORY_ENTRY_IAT:       0x6128 (236 bytes)
+Imported functions
+    Library
+        Name:                            KERNEL32.dll
+        Functions
+            Function
+                Name:                            DeleteCriticalSection
+            Function
+                Name:                            EnterCriticalSection
+            Function
+                Name:                            GetCurrentProcess
+            Function
+                Name:                            GetCurrentProcessId
+            Function
+                Name:                            GetCurrentThreadId
+            Function
+                Name:                            GetLastError
+            Function
+                Name:                            GetStartupInfoA
+            Function
+                Name:                            GetSystemTimeAsFileTime
+            Function
+                Name:                            GetTickCount
+            Function
+                Name:                            InitializeCriticalSection
+            Function
+                Name:                            LeaveCriticalSection
+            Function
+                Name:                            QueryPerformanceCounter
+            Function
+                Name:                            SetUnhandledExceptionFilter
+            Function
+                Name:                            Sleep
+            Function
+                Name:                            TerminateProcess
+            Function
+                Name:                            TlsGetValue
+            Function
+                Name:                            UnhandledExceptionFilter
+            Function
+                Name:                            VirtualProtect
+            Function
+                Name:                            VirtualQuery
+    Library
+        Name:                            msvcrt.dll
+        Functions
+            Function
+                Name:                            __dllonexit
+            Function
+                Name:                            __getmainargs
+            Function
+                Name:                            __initenv
+            Function
+                Name:                            __lconv_init
+            Function
+                Name:                            __set_app_type
+            Function
+                Name:                            __setusermatherr
+            Function
+                Name:                            _acmdln
+            Function
+                Name:                            _amsg_exit
+            Function
+                Name:                            _cexit
+            Function
+                Name:                            _fmode
+            Function
+                Name:                            _initterm
+            Function
+                Name:                            _iob
+            Function
+                Name:                            _lock
+            Function
+                Name:                            _onexit
+            Function
+                Name:                            _stat
+            Function
+                Name:                            _unlock
+            Function
+                Name:                            calloc
+            Function
+                Name:                            exit
+            Function
+                Name:                            fclose
+            Function
+                Name:                            fgets
+            Function
+                Name:                            fopen
+            Function
+                Name:                            fprintf
+            Function
+                Name:                            fputs
+            Function
+                Name:                            free
+            Function
+                Name:                            fwrite
+            Function
+                Name:                            malloc
+            Function
+                Name:                            memcpy
+            Function
+                Name:                            memset
+            Function
+                Name:                            printf
+            Function
+                Name:                            puts
+            Function
+                Name:                            signal
+            Function
+                Name:                            sprintf
+            Function
+                Name:                            strchr
+            Function
+                Name:                            strlen
+            Function
+                Name:                            strncmp
+            Function
+                Name:                            strstr
+            Function
+                Name:                            abort
+            Function
+                Name:                            vfprintf
+export directory not found
+Sections
+    Section
+        Name:                            .text
+        Virtual Address:                 0x1000
+        Physical Address:                0x1cd4
+        Size:                            0x1e00 (7680 bytes)
+        Pointer To Data:                 0x400
+        Relocations:                     0
+        Characteristics:                 0x60500060
+        Characteristic Names
+                                             IMAGE_SCN_CNT_CODE
+                                             IMAGE_SCN_CNT_INITIALIZED_DATA
+                                             IMAGE_SCN_MEM_EXECUTE
+                                             IMAGE_SCN_MEM_READ
+    Section
+        Name:                            .data
+        Virtual Address:                 0x3000
+        Physical Address:                0x30
+        Size:                            0x200 (512 bytes)
+        Pointer To Data:                 0x2200
+        Relocations:                     0
+        Characteristics:                 0xc0300040
+        Characteristic Names
+                                             IMAGE_SCN_CNT_INITIALIZED_DATA
+                                             IMAGE_SCN_MEM_READ
+                                             IMAGE_SCN_MEM_WRITE
+    Section
+        Name:                            .rdata
+        Virtual Address:                 0x4000
+        Physical Address:                0x69c
+        Size:                            0x800 (2048 bytes)
+        Pointer To Data:                 0x2400
+        Relocations:                     0
+        Characteristics:                 0x40300040
+        Characteristic Names
+                                             IMAGE_SCN_CNT_INITIALIZED_DATA
+                                             IMAGE_SCN_MEM_READ
+    Section
+        Name:                            .bss
+        Virtual Address:                 0x5000
+        Physical Address:                0x3f0
+        Size:                            0 (0 bytes)
+        Pointer To Data:                 0
+        Relocations:                     0
+        Characteristics:                 0xc0600080
+        Characteristic Names
+                                             IMAGE_SCN_CNT_UNINITIALIZED_DATA
+                                             IMAGE_SCN_MEM_READ
+                                             IMAGE_SCN_MEM_WRITE
+    Section
+        Name:                            .idata
+        Virtual Address:                 0x6000
+        Physical Address:                0x638
+        Size:                            0x800 (2048 bytes)
+        Pointer To Data:                 0x2c00
+        Relocations:                     0
+        Characteristics:                 0xc0300040
+        Characteristic Names
+                                             IMAGE_SCN_CNT_INITIALIZED_DATA
+                                             IMAGE_SCN_MEM_READ
+                                             IMAGE_SCN_MEM_WRITE
+    Section
+        Name:                            .CRT
+        Virtual Address:                 0x7000
+        Physical Address:                0x34
+        Size:                            0x200 (512 bytes)
+        Pointer To Data:                 0x3400
+        Relocations:                     0
+        Characteristics:                 0xc0300040
+        Characteristic Names
+                                             IMAGE_SCN_CNT_INITIALIZED_DATA
+                                             IMAGE_SCN_MEM_READ
+                                             IMAGE_SCN_MEM_WRITE
+    Section
+        Name:                            .tls
+        Virtual Address:                 0x8000
+        Physical Address:                0x20
+        Size:                            0x200 (512 bytes)
+        Pointer To Data:                 0x3600
+        Relocations:                     0
+        Characteristics:                 0xc0300040
+        Characteristic Names
+                                             IMAGE_SCN_CNT_INITIALIZED_DATA
+                                             IMAGE_SCN_MEM_READ
+                                             IMAGE_SCN_MEM_WRITE
+    Section
+        Name:                            /4
+        Virtual Address:                 0x9000
+        Physical Address:                0x2c0
+        Size:                            0x400 (1024 bytes)
+        Pointer To Data:                 0x3800
+        Relocations:                     0
+        Characteristics:                 0x42100040
+        Characteristic Names
+                                             IMAGE_SCN_CNT_INITIALIZED_DATA
+                                             IMAGE_SCN_MEM_DISCARDABLE
+                                             IMAGE_SCN_MEM_READ
+    Section
+        Name:                            /19
+        Virtual Address:                 0xa000
+        Physical Address:                0x476a1
+        Size:                            0x47800 (292864 bytes)
+        Pointer To Data:                 0x3c00
+        Relocations:                     0
+        Characteristics:                 0x42100040
+        Characteristic Names
+                                             IMAGE_SCN_CNT_INITIALIZED_DATA
+                                             IMAGE_SCN_MEM_DISCARDABLE
+                                             IMAGE_SCN_MEM_READ
+    Section
+        Name:                            /31
+        Virtual Address:                 0x52000
+        Physical Address:                0x2566
+        Size:                            0x2600 (9728 bytes)
+        Pointer To Data:                 0x4b400
+        Relocations:                     0
+        Characteristics:                 0x42100040
+        Characteristic Names
+                                             IMAGE_SCN_CNT_INITIALIZED_DATA
+                                             IMAGE_SCN_MEM_DISCARDABLE
+                                             IMAGE_SCN_MEM_READ
+    Section
+        Name:                            /45
+        Virtual Address:                 0x55000
+        Physical Address:                0x2679
+        Size:                            0x2800 (10240 bytes)
+        Pointer To Data:                 0x4da00
+        Relocations:                     0
+        Characteristics:                 0x42100040
+        Characteristic Names
+                                             IMAGE_SCN_CNT_INITIALIZED_DATA
+                                             IMAGE_SCN_MEM_DISCARDABLE
+                                             IMAGE_SCN_MEM_READ
+    Section
+        Name:                            /57
+        Virtual Address:                 0x58000
+        Physical Address:                0x7a4
+        Size:                            0x800 (2048 bytes)
+        Pointer To Data:                 0x50200
+        Relocations:                     0
+        Characteristics:                 0x42300040
+        Characteristic Names
+                                             IMAGE_SCN_CNT_INITIALIZED_DATA
+                                             IMAGE_SCN_MEM_DISCARDABLE
+                                             IMAGE_SCN_MEM_READ
+    Section
+        Name:                            /70
+        Virtual Address:                 0x59000
+        Physical Address:                0x766
+        Size:                            0x800 (2048 bytes)
+        Pointer To Data:                 0x50a00
+        Relocations:                     0
+        Characteristics:                 0x42100040
+        Characteristic Names
+                                             IMAGE_SCN_CNT_INITIALIZED_DATA
+                                             IMAGE_SCN_MEM_DISCARDABLE
+                                             IMAGE_SCN_MEM_READ
+    Section
+        Name:                            /81
+        Virtual Address:                 0x5a000
+        Physical Address:                0xe59
+        Size:                            0x1000 (4096 bytes)
+        Pointer To Data:                 0x51200
+        Relocations:                     0
+        Characteristics:                 0x42100040
+        Characteristic Names
+                                             IMAGE_SCN_CNT_INITIALIZED_DATA
+                                             IMAGE_SCN_MEM_DISCARDABLE
+                                             IMAGE_SCN_MEM_READ
+    Section
+        Name:                            /92
+        Virtual Address:                 0x5b000
+        Physical Address:                0x230
+        Size:                            0x400 (1024 bytes)
+        Pointer To Data:                 0x52200
+        Relocations:                     0
+        Characteristics:                 0x42100040
+        Characteristic Names
+                                             IMAGE_SCN_CNT_INITIALIZED_DATA
+                                             IMAGE_SCN_MEM_DISCARDABLE
+                                             IMAGE_SCN_MEM_READ
