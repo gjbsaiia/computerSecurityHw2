@@ -1,0 +1,78 @@
+Griffin Saiia
+Computer Security
+HW 2 Part 5
+
+1.)
+
+Analysis
+
+; int _cdecl main(int argc, const char **argv, const char **envp)
+public _main
+_main proc near
+
+argc= dword ptr 8
+	--> argc is 32 bits, stored at EBP+0x8
+argv= dword ptr 0Ch
+	--> argv is 32 bits, stored at EBP+0xC
+envp= dword ptr 10h
+	--> Environmental var is 32 bits, stored at EBP+0x10
+
+push    ebp
+	--> Push base pointer onto stack.
+mov     ebp, esp
+	--> Define stack pointer in terms of base pointer
+and     esp, 0FFFFFFF0h
+	--> align stack pointer
+sub     esp, 20h
+	--> offset stack pointer for local variables
+call    __main
+
+	--> Lets just say esp = -32
+
+mov     dword ptr[esp+1Ch], 3
+	--> assign value 3 to local var at [-4] ; x
+mov     dword ptr[esp+18h], 5
+	--> assign value 5 to local var at [-8] ; y
+mov     dword ptr[esp+14h], 0
+	--> assign value 0 to local var at [-12] ; z
+mov     eax, [esp+1Ch]
+	--> move 3 into eax
+imul    eax, [esp+18h]
+	--> multiply 3 by 5, store 15 in eax
+mov     edx, eax
+	--> mov 15 into data register
+mov     eax, [esp+1Ch]
+	--> move 3 into eax
+mov     ecx, eax
+	--> move 3 into count register ecx
+shr     ecx. 1Fh
+	--> shifts 3 by 31, 000011 by 11111 so 0
+add     eax, ecx
+	--> adds ecx (3) to eax (0), stores 3 in eax
+sar     eax, 1
+	--> signed bit shift by 1, store 1 in eax
+
+	--> Three commands above were a divide by 2 that ensured
+			negative values were not rounded wrong.
+
+sub     edx, eax
+	--> subtracts eax(1) from edx(15), stores 14 in edx
+mov     eax, edx
+	--> moves 14 into eax
+mov     [esp+14h], eax
+	--> assign value 14 to local var at [-12]
+mov     eax, [esp+14h]
+	--> moves 14 back into eax
+mov     [esp+4], eax
+	--> put value 14 at stack offset [-28], one below top of stack
+mov     dword ptr [esp], offset aD ; "%d"
+	--> moves "%d" onto stack top of stack [-32].
+	--> format string that points to previous frame with 14
+call    _printf
+	--> printf("%d",14) or printf([esp],[esp+4])
+mov     eax, 0
+	--> move 0 into eax
+leave
+retn
+	--> return eax, return 0
+_main endp

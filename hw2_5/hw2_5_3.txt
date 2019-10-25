@@ -1,0 +1,204 @@
+Griffin Saiia
+Computer Security
+HW 2 Part 5
+
+3.)
+
+Analysis
+
+
+; int _cdecl main(int argc, const char **argv, const char **envp)
+public _main
+_main proc near
+
+argc= dword ptr 8
+	--> argc is 32 bits, stored at EBP+0x8
+argv= dword ptr 0Ch
+	--> argv is 32 bits, stored at EBP+0xC
+envp= dword ptr 10h
+	--> Environmental var is 32 bits, stored at EBP+0x10
+
+push    ebp
+	--> Push base pointer onto stack.
+mov     ebp, esp
+	--> Define stack pointer in terms of base pointer
+and     esp, 0FFFFFFF0h
+	--> align stack pointer
+sub     esp, 40h
+	--> offset stack pointer for local variables
+call    __main
+
+	--> Lets say esp = -64
+
+
+FIRST:
+
+mov     dword ptr [esp+1Ch], 64h
+	--> assign value 100 to local var at [-36] ; x
+jmp     loc_4015D6
+	--> JUMPS TO SECOND
+
+
+THIRD:
+
+; 40151B
+mov     ecx, [esp+1Ch] ; x
+	--> move 100 to ecx
+mov     edx, 51EB851Fh
+	--> move 1374389535 to edx, 31 bits (edx maxes at 32)
+mov     eax, ecx
+	--> move 100 to eax
+imul    edx
+	--> multiply 1374389535 by 100, 137438953500
+			--> result: 10000000000000000000000000000000000000, 38 bits
+			--> result is too big for edx[32 bits], so:
+			--> EDX: 00000000000000000000000000100000 --> 32
+			--> EAX: 00000000000000000000000000000000 --> 0
+sar     edx, 5
+	--> bit shift left by 5, preserving MSB: 32 goes to 1, edx = 1
+mov     eax, ecx
+	--> move 100 to eax
+sar     eax, 1Fh
+	--> get MSB from eax, eax = 0
+sub     edx, eax
+	--> (1 - 0), edx = 1
+mov     eax, edx
+	--> move 1 to eax
+mov     [esp+18h], eax
+	--> assign value 1 to local var at [-40]; (-4 from x)
+mov     eax, [esp+18h]
+	--> move 1 to eax
+imul    edx, eax, -64h
+	--> eax*-64h(1*-100), edx = -100
+		--> edx = 11111111111111111111111110011100 (32 bits)
+		--> edx = FFFFFF9Ch
+mov     eax, [esp+1Ch] ; x
+	--> move 100 to eax
+lea     ecx, [edx+eax]
+	--> load [edx+eax]=(-100+100)
+			= (11111111111111111111111111010000)
+			= (FFFFFFD0h)
+			= (4294967288), into ecx
+mov     edx, 66666667h
+	--> move 1717986919 into edx
+mov     eax, ecx
+	--> move 4294967288 into eax
+imul    edx
+	--> (4294967288 * 1717986919) = 7378697618316905672
+	--> = 110011001100110011001100110001111001100110011001100110011001000, 63 bits
+	--> EDX: 01100110011001100110011001100011 = 1717986915
+	--> EAX: 11001100110011001100110011001000 = 3435973832
+sar     edx, 2
+	--> bit shift by 2, edx = 429496728
+mov     eax, ecx
+	--> mov 429496728 to eax
+sar     eax, 1Fh
+	--> bit shift eax by 31, you get 1
+sub     edx, eax
+	--> (429496728 - 1) stored in edx, edx = 429496727
+mov     eax, edx
+	--> move 429496727 to eax
+mov     [esp+14h], eax
+	--> move 429496727 to [-44]
+mov     ecx, [esp+1Ch] ; x
+	--> move 100 to ecx
+mov     edx, 66666667h
+	--> move 1717986919 to edx
+mov     eax, ecx
+	--> move 100 to eax
+imul    edx
+	--> (100 * 1717986919) = 171798691900
+	--> = 10100000000000000000000000000000111100
+	--> EDX: 00000000000000000000000000101000 = 40
+	--> EAX: 00000000000000000000000000111100 = 60
+sar     edx, 2
+	--> bit shift edx by 2, edx = 10
+mov     eax, ecx
+	--> move 100 to eax
+sar     eax, 1Fh
+	--> bit shift 100 by 31, eax = 0
+sub     edx, eax
+	--> (10 - 0), store 10 in edx
+mov     eax, edx
+	--> move 10 into eax
+shl     eax, 2
+	--> bit shift eax left 2, edx = 40
+add     eax, edx
+	--> (40+10), store 50 in eax
+add     eax, eax
+	--> (50+50),store 100 in eax
+sub     ecx, eax
+	--> (100 - 100), store 0 in ecx
+mov     eax, ecx
+	--> move 0 into eax
+mov     [esp+10h], eax
+	--> move 0 into [-48]
+mov     eax, [esp+18h]
+	--> move 1 into eax
+imul    eax, [esp+18h]
+	--> (1 * 1), store 1 in eax
+imul    eax, [esp+18h]
+	--> (1 * 1), store 1 in eax
+mov     edx, eax
+	--> move 1 into edx
+mov     eax, [esp+14h]
+	--> move  429496727 to eax
+imul    eax, [esp+14h]
+	--> (429496727*429496727) = 184467438503712529
+	--> = 1010001111010111000010100001110000101000111101011100010001, 58 bits
+	--> EDX: 00000010100011110101110000101000 = 42949672
+	--> EAX: 01110000101000111101011100010001 = 1889785617
+imul    eax, [esp+14h]
+	--> (1889785617 * 429496727) = 811656737233175559
+	--> = 101101000011100101011000000010001110010101100000010000000111, 60 digits
+	--> EDX: 00001011010000111001010110000000=188978560
+	--> EAX: 10001110010101100000010000000111=2388001799
+add     edx, eax
+	--> (188978560+2388001799), 2576980359 stored in edx
+mov     eax, [esp+10h]
+	--> move 0 into eax
+imul    eax, [esp+10h]
+	--> (0*0), 0 stored in eax
+imul    eax, [esp+10h]
+	--> (0 * 0), 0 stored in eax
+add     eax, edx
+	--> (0+2576980359), 2576980359 (or -1717986937) stored in eax
+cmp     eax, [esp+1Ch] ; x
+	--> (2576980359-100= >0), flag set to >0
+jnz     short loc_4015D1
+	--> Jumps to FOURTH
+mov     eax, [esp+1Ch] ; x
+	--> moves 101 to eax
+mov     [esp+4], eax
+	--> moves 101 onto the second to highest stack frame
+mov     dword ptr [esp], offset aD ; "%d "
+	--> moves "%d" onto the highest stack frame
+call    _printf
+	--> printf("%d", 101) or printf([-64], [-60])
+
+--> Jumps back to SECOND
+
+
+FOURTH:
+
+; 4015D1
+add     dword ptr [esp+1Ch], 1 ; x
+	--> (100+1), 101 stored in [-36]
+
+--> Jumps back to THIRD
+
+
+SECOND:
+
+; 4015D6
+cmp     dword ptr [esp+1Ch], 3E7h ; x
+	--> compare 100 to 999 (100-999 = <0), flag is set to <0
+jle     loc_40151B
+	--> JUMPS TO THIRD
+mov     eax, 0
+	--> move 0 to eax
+leave
+	--> exit function
+retn
+	--> return eax, return 0
+endp

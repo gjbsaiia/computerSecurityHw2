@@ -1,0 +1,110 @@
+Griffin Saiia
+Computer Security
+HW 2 Part 5
+
+2.)
+
+Analysis
+
+; int _cdecl main(int argc, const char **argv, const char **envp)
+public _main
+_main proc near
+
+argc= dword ptr 8
+	--> argc is 32 bits, stored at EBP+0x8
+argv= dword ptr 0Ch
+	--> argv is 32 bits, stored at EBP+0xC
+envp= dword ptr 10h
+	--> Environmental var is 32 bits, stored at EBP+0x10
+
+
+push    ebp
+	--> Push base pointer onto stack.
+mov     ebp, esp
+	--> Define stack pointer in terms of base pointer
+and     esp, 0FFFFFFF0h
+	--> align stack pointer
+sub     esp, 40h
+	--> offset stack pointer for local variables
+call    __main
+
+	--> Lets just say esp = -64
+
+
+FIRST:
+
+mov     dword ptr [esp+18h], 0Ch
+	--> assign value 12 to local var at [-40] ; a
+mov     dword ptr [esp+1Ch], 0Fh
+	--> assign value 15 to local var at [-36] ; b
+mov     dword ptr [esp+20h], 0DDh
+	--> assign value 221 to local var at [-32] ; c
+mov     dword ptr [esp+24h], 3
+	--> assign value 3 to local var at [-28] ; d
+mov     dword ptr [esp+28h], 1B0h
+	--> assign value 432 to local var at [-24] ; e
+mov     dword ptr [esp+2Ch], 36h
+	--> assign value 54 to local var at [-20] ; f
+mov     dword ptr [esp+30h], 10h
+	--> assign value 16 to local var at [-16] ; g
+mov     dword ptr [esp+34h], 43h
+	--> assign value 67 to local var at [-12] ; h
+mov     dword ptr [esp+3Ch], 0
+	--> assign value 0 to local var at [-4] ; i
+mov     dword ptr [esp+38h], 0
+	--> assign value 0 to local var at [-8] ; k
+jmp     short loc_40157F
+	--> JUMPS TO SECOND
+
+
+THIRD:
+
+; 401560
+mov     eax, [esp+38h] ; k
+	--> move 0 to eax
+mov     eax, [esp+eax*4+18h]
+	--> [esp+(0*4)+18h]=[-40], moves 12 to eax
+cmp     eax, [esp+3Ch] ; i
+	--> compare 12 to 0 (12 - 0 = >0). flag is set >0
+jle     short loc_40157A
+	--> checks flag, greater than, does not make jump
+mov     eax, [esp+38h] ; k
+	--> move 0 to eax
+mov     eax, [esp+eax*4+18h]
+	--> [esp+(0*4)+18h]=[-40], moves 12 to eax
+mov     [esp+3Ch], eax ; i
+	--> assign value 12 to local var at [-4] ; i
+
+--> RETURN TO SECOND
+
+
+SECOND:
+
+; 40157F
+cmp     dword ptr[esp+38h], 7 ; k
+	--> compare 0 to 7 ( 0-7= <0 ), flag is set <0
+jle     short loc_401560
+	--> checks flag, less than, makes jump
+
+	--> JUMPS TO THIRD
+
+mov     eax, [esp+3Ch] ; i
+	--> move 12 to eax
+mov     [esp+4], eax
+	--> moves value 12 to stack offset [-60], one below top of stack
+mov     dword ptr [esp], offset aD ; "%d"
+	--> format string that points to previous frame with 14
+call    _printf
+	--> printf("%d",12) or printf([esp],[esp+4])
+mov     eax, 0
+	--> move 0 to eax
+leave
+retn
+	--> return eax, return 0
+_main endp
+
+
+UNUSED:
+
+; 40157A
+add     dword ptr[esp+38h], 1 ; k

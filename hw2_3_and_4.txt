@@ -1,0 +1,63 @@
+Griffin Saiia
+Computer Security
+HW 2
+
+2.)
+--> Intialize variable X, Y, Z
+
+
+--> Move DATA to multiplication register
+--> Move DATA to DS
+--> Multiply DATA with X variable
+--> Load 0 into BX register
+--> Move Y into BL register
+--> Add BL to itself (2*Y)
+--> Add BL to Y (3*Y)
+--> Subtract BX(0) from AX(DS), (DS)
+--> Shift AX(ds) by 1, ds/2
+--> move AX into z, z=ds/2
+--> move hex value 4C (dec 21) into AH
+--> Call interrupt 21
+
+We end program with:
+x = 25
+y = 96
+z = 25/2 = 12
+
+3.)
+
+--> Initialize array [34,12,3,18]
+        szMsg = length of array (4)
+--> Move 3 to count register
+--> Push ecx onto stack
+--> xor esi and esi, set 0 to esi
+--> move 3 to count register
+--> move array[0] to ebx
+--> compare ebx(array[0]) to array[1], not equal
+--> skip line
+--> exchange ebx(array[0]) and array[1]: array[1] = 34, ebx = 12
+--> move ebx into array[0], array[0] = 12
+--> increment esi to 4
+--> loop back to L0
+--> move array[1] to ebx, ebx = 34
+--> compare ebx(array[1]) to array[2], not equal
+--> skip line
+--> exchange ebx(array[1]) and array[2]: array[2] = 34, ebx=3
+--> move ebx into array[1], array[1] = 3
+--> increment esi to 4
+--> loopback to L0
+--> move array[2] to ebx, ebx = 34
+--> compare ebx(array[2]) to array[3], not equal
+--> skip line
+--> exchange ebx(array[2]) and array[3]: array[3] = 34, ebx=18
+--> move ebx into array[2], array[2] = 18
+--> increment esi to 4
+--> loopback to L0
+--> move array[3] to ebx, ebx = 34
+--> compare ebx(array[3]) to array[4](unset), not equal
+--> skip line
+--> exchange ebx(array[3]) and array[4]: array[4] = 34, ebx=?
+*** This is undefined behavior. Exceeding bounds of defined array. 
+        Error is thrown, program exits.
+
+
